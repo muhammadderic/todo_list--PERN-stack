@@ -8,14 +8,28 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use(() => {
+// ROUTES
+// Create a todo
+app.post("/todos", async (req, res) => {
   try {
-    console.log("Hello Deric")
+    const { description } = req.body
+    const newTodo = await pool.query(
+      "INSERT INTO todos (description) VALUES($1) RETURNING *", [description]
+    )
+    res.json(newTodo.rows[0]) // for Postman
   } catch (error) {
     console.error(error.message)
   }
 })
 
-app.listen(process.env.PORT, () => {
+// Get all todos
+
+// Get a todo
+
+// Update a todo
+
+// Delete a todo
+
+app.listen(5000, () => {
   console.log("server is listening")
 })

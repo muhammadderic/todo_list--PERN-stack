@@ -23,8 +23,25 @@ app.post("/todos", async (req, res) => {
 })
 
 // Get all todos
+app.get("/todos", async (req, res) => {
+  try {
+    const allTodos = await pool.query("SELECT * FROM todos")
+    res.json(allTodos.rows)
+  } catch (error) {
+    console.error(error.message)
+  }
+})
 
 // Get a todo
+app.get("/todos/:id", async (req, res) => {
+  try {
+    const { todo_id } = req.params
+    const todo = await pool.query(`SELECT * FROM todos WHERE todo_id=${todo_id}`)
+    res.json(todo.rows)
+  } catch (error) {
+    console.error(error.message)
+  }
+})
 
 // Update a todo
 

@@ -4,30 +4,10 @@ import { useState } from "react"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
-import Link from "@mui/material/Link"
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
 // MUI icons
 import ListAltIcon from '@mui/icons-material/ListAlt';
-
-function Copyright() {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center">
-      Copyright @
-      <Link
-        color="inherit"
-        href="https://wwww.github.com/muhammadderic">
-        muhammadderic
-      </Link>
-      {" "}
-      {new Date().getFullYear()}
-      .
-    </Typography>
-  )
-}
 
 function InputTodo() {
   const [description, setDescription] = useState("")
@@ -82,7 +62,6 @@ function InputTodo() {
           </Button>
         </Box>
       </Box>
-      <Copyright />
     </Container>
   )
 }

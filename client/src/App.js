@@ -1,7 +1,9 @@
 // Components
 import InputTodo from "./components/InputTodo";
+import ListTodo from "./components/ListTodo";
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material"
+import { createTheme, ThemeProvider, Typography } from "@mui/material"
+import Link from "@mui/material/Link"
 
 const theme = createTheme({
   palette: {
@@ -18,10 +20,31 @@ const theme = createTheme({
   }
 })
 
+function Copyright() {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center">
+      Copyright @
+      <Link
+        color="inherit"
+        href="https://wwww.github.com/muhammadderic">
+        muhammadderic
+      </Link>
+      {" "}
+      {new Date().getFullYear()}
+      .
+    </Typography>
+  )
+}
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <InputTodo />
+      <ListTodo />
+      <Copyright />
     </ThemeProvider>
   );
 }

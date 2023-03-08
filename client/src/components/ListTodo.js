@@ -1,5 +1,7 @@
 // React
 import { useEffect, useState } from "react"
+// Components
+import EditTodo from "./EditTodo"
 // MUI
 import { Container, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 
@@ -36,7 +38,7 @@ export default function ListTodo() {
             <TableRow key={todo.todo_id}>
               <TableCell>{todo.todo_id}</TableCell>
               <TableCell>{todo.description}</TableCell>
-              <TableCell></TableCell>
+              <TableCell><EditTodo todo={todo} /></TableCell>
               <TableCell></TableCell>
             </TableRow>
           ))}

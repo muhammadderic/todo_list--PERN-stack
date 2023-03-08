@@ -3,10 +3,24 @@ import { useEffect, useState } from "react"
 // Components
 import EditTodo from "./EditTodo"
 // MUI
-import { Container, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
+import { Container, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
+// MUI Icons
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function ListTodo() {
   const [todos, setTodos] = useState([])
+
+  const deleteTodo = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/todos/${id}`, {
+        method: "DELETE"
+      })
+      setTodos(todos.filter(todo => todo.todo_id !== id))
+      window.location = "/"
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
   const getTodos = async () => {
     try {
@@ -39,7 +53,11 @@ export default function ListTodo() {
               <TableCell>{todo.todo_id}</TableCell>
               <TableCell>{todo.description}</TableCell>
               <TableCell><EditTodo todo={todo} /></TableCell>
-              <TableCell></TableCell>
+              <TableCell>
+                <IconButton aria-label="delete" color="warning" sx={{ cursor: "pointer" }} onClick={() => deleteTodo(todo.todo_id)} >
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

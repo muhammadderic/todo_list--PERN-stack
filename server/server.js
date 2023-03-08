@@ -25,7 +25,7 @@ app.post("/todos", async (req, res) => {
 // Get all todos
 app.get("/todos", async (req, res) => {
   try {
-    const allTodos = await pool.query("SELECT * FROM todos")
+    const allTodos = await pool.query("SELECT * FROM todos;")
     res.json(allTodos.rows)
   } catch (error) {
     console.error(error.message)
@@ -36,7 +36,7 @@ app.get("/todos", async (req, res) => {
 app.get("/todos/:id", async (req, res) => {
   try {
     const { todo_id } = req.params
-    const todo = await pool.query(`SELECT * FROM todos WHERE todo_id=${todo_id}`)
+    const todo = await pool.query(`SELECT * FROM todos WHERE todo_id=${todo_id};`)
     res.json(todo.rows)
   } catch (error) {
     console.error(error.message)
@@ -51,7 +51,7 @@ app.put("/todos/:id", async (req, res) => {
     await pool.query(`
       UPDATE todos
       SET description='${description}'
-      WHERE todo_id=${id}
+      WHERE todo_id=${id};
     `)
     res.json("todo was successfully updated")
   } catch (error) {
@@ -60,6 +60,18 @@ app.put("/todos/:id", async (req, res) => {
 })
 
 // Delete a todo
+app.delete("/todos/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    await pool.query(`
+      DELETE FROM todos
+      WHERE todo_id=${id};
+    `)
+    res.json("todo was successfully deleted")
+  } catch (error) {
+    console.error(error.message)
+  }
+})
 
 app.listen(5000, () => {
   console.log("server is listening")
